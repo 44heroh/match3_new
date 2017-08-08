@@ -154,7 +154,7 @@ public class GUI {
 
     public static int randomNTexture()
     {
-        int texture = 0 + (int) Math.round((Math.random() * 3) - 4);
+        int texture = 1 + (int) Math.round((Math.random() * 4) - 4);
 //        System.out.println("texture = " + texture);
         return texture;
     }

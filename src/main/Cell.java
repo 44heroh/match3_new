@@ -65,7 +65,7 @@ public class Cell {
 
     ///Ячейка "думает" как она должна выглядеть
     public Sprite getSprite() {
-        if(this.state > 0 || this.state == 0)
+        if(this.state > 0)
         {
             ///Если в ней тело змеи -- как змея
             return Sprite.BODY;
@@ -75,6 +75,11 @@ public class Cell {
             ///Если в ней нет ничего -- никак выглядеть и не должна
             return null;
         }*/
+        else if(this.state == 0)
+        {
+            ///Если в ней нет ничего -- никак выглядеть и не должна
+            return Sprite.POISON;
+        }
         else
         {
             ///Иначе проходимся свитчем по возможным объектам.
@@ -86,8 +91,8 @@ public class Cell {
                     return Sprite.BANANAS;
                 case -3 :
                     return Sprite.STRABERRY;
-                case -4 :
-                    return Sprite.POISON;
+                /*case -4 :
+                    return Sprite.POISON;*/
                 default:return Sprite.CHERRIES;
             }
         }
