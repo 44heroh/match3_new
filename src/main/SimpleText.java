@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class SimpleText {
     public static void drawString(String s, int x, int y) {
         int startX = x;
+        glDisable(GL_TEXTURE_2D);
         glLoadIdentity();
         glBegin(GL_POINTS);
         glColor3f(0,1,0);

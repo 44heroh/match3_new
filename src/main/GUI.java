@@ -79,12 +79,13 @@ public class GUI {
         {
             for (Cell cell:line)
             {
-                drawElement(cell);
+//                drawElement(cell);
+                cell.draw(cell);
             }
         }
     }
 
-    ///Рисует элемент, переданный в аргумент
+    /*///Рисует элемент, переданный в аргумент
     private static void drawElement(Cell elem) {
         ///Если у ячейки нет спрайта, то рисовать её не нужно
         if(elem.getSprite() == null) return;
@@ -103,7 +104,7 @@ public class GUI {
         glTexCoord2f(0,1);
         glVertex2f(elem.getX(), elem.getY());
         glEnd();
-    }
+    }*/
 
     public static int getState(int x, int y)
     {

@@ -3,6 +3,7 @@ package main;
 import java.util.Random;
 
 import static main.Constants.CELL_SIZE;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Created by User on 16.02.2017.
@@ -98,6 +99,24 @@ public class Cell {
         }
     }
 
+    ///Рисует элемент, переданный в аргумент
+    public void draw(Cell elem) {
+        ///Если у ячейки нет спрайта, то рисовать её не нужно
+        if(elem.getSprite() == null) return;
 
+        ///Собственно, рисуем. Подробно не останавливаюсь, так как нам интересна сама логика игры, а не LWJGL
 
+        elem.getSprite().getTexture().bind();
+
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(elem.getX(), elem.getY()+elem.getHeight());
+        glTexCoord2f(1,0);
+        glVertex2f(elem.getX()+elem.getWidth(), elem.getY()+elem.getHeight());
+        glTexCoord2f(1,1);
+        glVertex2f(elem.getX()+elem.getWidth(), elem.getY());
+        glTexCoord2f(0,1);
+        glVertex2f(elem.getX(), elem.getY());
+        glEnd();
+    }
 }
