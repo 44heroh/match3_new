@@ -23,7 +23,7 @@ public class GUI {
     public static void init() {
         initializeOpenGL();
 
-        cells = new Cell[CELLS_COUNT_Y][CELLS_COUNT_Y];
+        cells = new Cell[CELLS_COUNT_Y][CELLS_COUNT_X];
 
         Random rnd = new Random();
 
