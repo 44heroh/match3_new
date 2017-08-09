@@ -100,23 +100,23 @@ public class Cell {
     }
 
     ///Рисует элемент, переданный в аргумент
-    public void draw(Cell elem) {
+    public void draw() {
         ///Если у ячейки нет спрайта, то рисовать её не нужно
-        if(elem.getSprite() == null) return;
+        if( getSprite() == null) return;
 
         ///Собственно, рисуем. Подробно не останавливаюсь, так как нам интересна сама логика игры, а не LWJGL
 
-        elem.getSprite().getTexture().bind();
+         getSprite().getTexture().bind();
 
         glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
-        glVertex2f(elem.getX(), elem.getY()+elem.getHeight());
+        glVertex2f( getX(),  getY()+ getHeight());
         glTexCoord2f(1,0);
-        glVertex2f(elem.getX()+elem.getWidth(), elem.getY()+elem.getHeight());
+        glVertex2f( getX()+ getWidth(),  getY()+ getHeight());
         glTexCoord2f(1,1);
-        glVertex2f(elem.getX()+elem.getWidth(), elem.getY());
+        glVertex2f( getX()+ getWidth(),  getY());
         glTexCoord2f(0,1);
-        glVertex2f(elem.getX(), elem.getY());
+        glVertex2f( getX(),  getY());
         glEnd();
     }
 }

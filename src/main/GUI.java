@@ -80,7 +80,7 @@ public class GUI {
             for (Cell cell:line)
             {
 //                drawElement(cell);
-                cell.draw(cell);
+                cell.draw();
             }
         }
     }
