@@ -3,6 +3,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glClearColor;
+
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -38,16 +41,18 @@ public class Main extends Applet {
 
             countStep++;
 
-            System.out.println("countStep = " + countStep);
-            if(Mouse.isButtonDown(0)){
-                System.out.println("LEFT_MOUSE");
-                SimpleText.drawString("countStep - " + countStep, 30, 40);
-            }
-
             ///Создаём ягодку в случайном месте
             generate_new_obj();
 
+            glClear(GL_COLOR_BUFFER_BIT);
             GUI.draw();
+
+            System.out.println("countStep = " + countStep);
+
+            SimpleText.drawString("countStep - " + countStep, 30, 40);
+            if(Mouse.isButtonDown(0)){
+                System.out.println("LEFT_MOUSE");
+            }
 
             GUI.update(have_to_decrease);
         }
