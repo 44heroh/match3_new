@@ -45,6 +45,7 @@ public class Main extends Applet {
             glClear(GL_COLOR_BUFFER_BIT);
             GUI.draw();
 
+
             countStep++;
             //System.out.println("countStep = " + countStep);
             SimpleText.drawString("countStep - " + countStep, 30, 40);
