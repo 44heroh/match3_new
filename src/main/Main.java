@@ -45,12 +45,14 @@ public class Main extends Applet {
             glClear(GL_COLOR_BUFFER_BIT);
             GUI.draw();
 
-
             countStep++;
             //System.out.println("countStep = " + countStep);
             SimpleText.drawString("countStep - " + countStep, 30, 40);
             if(Mouse.isButtonDown(0)){
                 System.out.println(String.format("LEFT_MOUSE, x = %d, y = %d", Mouse.getX( ), Mouse.getY()));
+                Cell cell = GUI.getCellByCoordinates(Mouse.getX(), Mouse.getY());
+                System.out.println(cell.getSprite().toString());
+
             }
 
             GUI.update(have_to_decrease);

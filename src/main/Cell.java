@@ -85,16 +85,17 @@ public class Cell {
         {
             ///Иначе проходимся свитчем по возможным объектам.
             ///Так как это демо -- я добавил только ягоды
-
             switch (this.state)
             {
+                case -1:
+                    return Sprite.CHERRIES;
                 case -2 :
                     return Sprite.BANANAS;
                 case -3 :
                     return Sprite.STRABERRY;
-                /*case -4 :
-                    return Sprite.POISON;*/
-                default:return Sprite.CHERRIES;
+                case -4 :
+                    return Sprite.POISON;
+                default:return null;
             }
         }
     }
@@ -105,7 +106,6 @@ public class Cell {
         if( getSprite() == null) return;
 
         ///Собственно, рисуем. Подробно не останавливаюсь, так как нам интересна сама логика игры, а не LWJGL
-
          getSprite().getTexture().bind();
 
         glBegin(GL_QUADS);

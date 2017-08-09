@@ -1,6 +1,7 @@
 package main;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -131,8 +132,19 @@ public class GUI {
 
     public static int randomNTexture()
     {
-        int texture = 1 + (int) Math.round((Math.random() * 4) - 4);
+        int texture = (int) Math.round((Math.random() * 4) - 4);
+        System.out.println("texture " + texture);
 //        System.out.println("texture = " + texture);
         return texture;
     }
+
+    public static Cell getCellByCoordinates(int x, int y)
+    {
+
+        int row = CELLS_COUNT_Y - y / CELL_SIZE - 1;
+        int col = x / CELL_SIZE;
+        System.out.println(String.format("row = %d, col = %d, state - %d", row, col, cells[row][col].getState()));
+        return cells[row][col];
+    }
+
 }
