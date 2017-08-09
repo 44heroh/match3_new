@@ -71,30 +71,20 @@ public class Cell {
             ///Если в ней тело змеи -- как змея
             return Sprite.BODY;
         }
-        /*else if(this.state == 0)
-        {
-            ///Если в ней нет ничего -- никак выглядеть и не должна
-            return null;
-        }*/
-        else if(this.state == 0)
-        {
-            ///Если в ней нет ничего -- никак выглядеть и не должна
-            return Sprite.POISON;
-        }
         else
         {
             ///Иначе проходимся свитчем по возможным объектам.
             ///Так как это демо -- я добавил только ягоды
             switch (this.state)
             {
+                case 0 :
+                    return Sprite.POISON;
                 case -1:
                     return Sprite.CHERRIES;
                 case -2 :
                     return Sprite.BANANAS;
                 case -3 :
                     return Sprite.STRABERRY;
-                case -4 :
-                    return Sprite.POISON;
                 default:return null;
             }
         }
