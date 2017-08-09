@@ -39,6 +39,15 @@ public class Main extends Applet {
         ///Создаём ягодку в случайном месте
         generate_new_obj();
 
+        // Флаг - признак была ли нажата кнопка мыши
+        boolean mousePressed = false;
+        // Позиция мыши, когда была нажата кнопка мыши
+        int mousePressedX = -1;
+        int mousePressedY = -1;
+
+        // Был ли произведен обмен в результате текущего удерживания кнопки мыши. Чтобы повторно не проводить операцию обмена.
+        boolean swapped = false;
+
         ///Обновляем и рисуем графические элементы
         while(!Display.isCloseRequested()) {
 
@@ -49,10 +58,34 @@ public class Main extends Applet {
             //System.out.println("countStep = " + countStep);
             SimpleText.drawString("countStep - " + countStep, 30, 40);
             if(Mouse.isButtonDown(0)){
-                System.out.println(String.format("LEFT_MOUSE, x = %d, y = %d", Mouse.getX( ), Mouse.getY()));
-                Cell cell = GUI.getCellByCoordinates(Mouse.getX(), Mouse.getY());
-                System.out.println(cell.getSprite().toString());
-
+                // Проверяем было ли это первое нажатие или же пользователь удерживает кнопку несколько кадров
+                if (!mousePressed) {   // Кнопка нажата впервые
+                    System.out.println(String.format("LEFT_MOUSE, x = %d, y = %d", Mouse.getX( ), Mouse.getY()));
+                    //Запоминаем позицию
+                    mousePressedX = Mouse.getX();
+                    mousePressedY = Mouse.getY();
+                    mousePressed = true;
+                }
+                else if (!swapped) {
+                    // Получаем ячейку, по которой был сделан первоначальный щелчок
+                    Cell cell = GUI.getCellByCoordinates(mousePressedX, mousePressedY);
+                    if (Mouse.getX() - mousePressedX > CELL_SIZE / 2) { // Движение вправо
+                        swapped = cell.swap(Cell.NEIGHBOUR_RIGHT);
+                    }
+                    else if (Mouse.getX() - mousePressedX < - CELL_SIZE / 2) { // Движение влево
+                        swapped = cell.swap(Cell.NEIGHBOUR_LEFT);
+                    }
+                    else if (Mouse.getY() - mousePressedY > CELL_SIZE / 2) {
+                        swapped = cell.swap(Cell.NEIGHBOUR_TOP);
+                    }
+                    else if (Mouse.getY() - mousePressedY < -CELL_SIZE / 2) {
+                        swapped = cell.swap(Cell.NEIGHBOUR_BOTTOM);
+                    }
+                }
+            }
+            else {
+                mousePressed = false;
+                swapped = false;
             }
 
             GUI.update(have_to_decrease);

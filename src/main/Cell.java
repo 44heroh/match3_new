@@ -2,13 +2,24 @@ package main;
 
 import java.util.Random;
 
+import static main.Constants.CELLS_COUNT_X;
+import static main.Constants.CELLS_COUNT_Y;
 import static main.Constants.CELL_SIZE;
+import main.GUI;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Created by User on 16.02.2017.
  */
 public class Cell {
+
+    // Направления соседей по часовой стрелке
+    public static final int NEIGHBOUR_TOP = 0;
+    public static final int NEIGHBOUR_RIGHT = 1;
+    public static final int NEIGHBOUR_BOTTOM = 2;
+    public static final int NEIGHBOUR_LEFT = 3;
+
+
     private int x;
     private int y;
     private int state;/* 0 -> ячейка пуста
@@ -16,10 +27,16 @@ public class Cell {
                         <0 -> Что-то необычное:
                             -1: Ягоды
                         */
+
+    private int row; // Строка ячейки
+    private int col; // Столбец ячейки
+
     ///Конструктор просто выставляет начальные значения координат и состояния
-    public Cell (int x, int y, int state){
-        this.x=x;
-        this.y=y;
+    public Cell(int row, int col, int state){
+        this.col = col;
+        this.row = row;
+        this.x = col * CELL_SIZE;
+        this.y = row * CELL_SIZE;
         this.state=state;
     }
 
@@ -108,5 +125,53 @@ public class Cell {
         glTexCoord2f(0,1);
         glVertex2f( getX(),  getY());
         glEnd();
+    }
+
+    public boolean swap(int neighbourDirection)
+    {
+        Cell neighbour = null;
+        switch (neighbourDirection) {
+            case NEIGHBOUR_RIGHT:
+                if (col <  CELLS_COUNT_X - 1) {
+                    neighbour = GUI.cells[row][col + 1];
+                }
+                break;
+            case NEIGHBOUR_LEFT:
+                if (col > 0) {
+                    neighbour = GUI.cells[row][col - 1];
+                }
+                break;
+            case NEIGHBOUR_TOP:
+                if (row < CELLS_COUNT_Y - 1) {
+                    neighbour = GUI.cells[row + 1][col];
+                }
+                break;
+            case NEIGHBOUR_BOTTOM:
+                if (row > 0) {
+                    neighbour = GUI.cells[row - 1][col];
+                }
+                break;
+            default: neighbour = null;
+        }
+        // Если сосед существует, то меняем местами.
+        if (neighbour != null)  {
+            int neighbourCol = neighbour.col;
+            int neighbourRow = neighbour.row;
+            neighbour.setPosition(this.row, this.col);
+            this.setPosition(neighbourRow, neighbourCol);
+
+            System.out.println(String.format("This sprite - %s, neighbour sprite - %s", this.getSprite().toString(), neighbour.getSprite().toString()));
+            return true;
+        }
+        return false;
+    }
+
+    protected void setPosition(int row, int col)
+    {
+        this.col = col;
+        this.row = row;
+        this.x = col * CELL_SIZE;
+        this.y = row * CELL_SIZE;
+        GUI.cells[row][col] = this;
     }
 }

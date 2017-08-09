@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 public class GUI {
     ///CELLS_COUNT_X и CELLS_COUNT_Y -- константы
     //Cell -- класс, который реализует main.GUIElement; им займёмся немного позже
-    private static Cell[][] cells;
+    public static Cell[][] cells;
 
     public static void init() {
         initializeOpenGL();
@@ -29,7 +29,7 @@ public class GUI {
 
         for (int i = 0; i < CELLS_COUNT_Y; i++) {
             for (int j = 0; j < CELLS_COUNT_X; j++) {
-                cells[i][j] = new Cell(j*CELL_SIZE, i*CELL_SIZE, (rnd.nextInt(100) < INITIAL_SPAWN_CHANCE?randomNTexture():0));
+                cells[i][j] = new Cell(i, j, randomNTexture());
             }
         }
     }
@@ -131,17 +131,13 @@ public class GUI {
     public static int randomNTexture()
     {
         int texture = (int) Math.round((Math.random() * 4) - 4) + 1;
-        System.out.println("texture " + texture);
-//        System.out.println("texture = " + texture);
         return texture;
     }
 
     public static Cell getCellByCoordinates(int x, int y)
     {
-
         int row = y / CELL_SIZE ;
         int col = x / CELL_SIZE;
-        System.out.println(String.format("row = %d, col = %d, state - %d", row, col, cells[row][col].getState()));
         return cells[row][col];
     }
 
