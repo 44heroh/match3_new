@@ -79,32 +79,10 @@ public class GUI {
         {
             for (Cell cell:line)
             {
-//                drawElement(cell);
                 cell.draw();
             }
         }
     }
-
-    /*///Рисует элемент, переданный в аргумент
-    private static void drawElement(Cell elem) {
-        ///Если у ячейки нет спрайта, то рисовать её не нужно
-        if(elem.getSprite() == null) return;
-
-        ///Собственно, рисуем. Подробно не останавливаюсь, так как нам интересна сама логика игры, а не LWJGL
-
-        elem.getSprite().getTexture().bind();
-
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(elem.getX(), elem.getY()+elem.getHeight());
-        glTexCoord2f(1,0);
-        glVertex2f(elem.getX()+elem.getWidth(), elem.getY()+elem.getHeight());
-        glTexCoord2f(1,1);
-        glVertex2f(elem.getX()+elem.getWidth(), elem.getY());
-        glTexCoord2f(0,1);
-        glVertex2f(elem.getX(), elem.getY());
-        glEnd();
-    }*/
 
     public static int getState(int x, int y)
     {
@@ -137,12 +115,10 @@ public class GUI {
 
 
         // Для поддержки текстур
-
         glEnable(GL_TEXTURE_2D);
 
 
         // Для поддержки прозрачности
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
